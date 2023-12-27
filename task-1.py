@@ -4,14 +4,19 @@ import time
 requests_queue = queue.Queue()
 request_id = 1
 
+
 def generate_request(request_id):
     requests_queue.put(request_id)
     print(f"Створено заявку {request_id}")
+
 
 def process_request():
     if not requests_queue.empty():
         request = requests_queue.get()
         print(f"Оброблено заявку {request}")
+    else:
+        print("Черга пуста")
+
 
 def main():
     global request_id
@@ -23,6 +28,7 @@ def main():
             time.sleep(0.5)
     except KeyboardInterrupt:
         print("Програма зупинена користувачем")
+
 
 if __name__ == "__main__":
     main()
